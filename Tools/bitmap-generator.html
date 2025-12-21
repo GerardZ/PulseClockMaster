@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<style type="text/css">
+		.container {
+			background-color: #333;
+			width: 209px;
+
+		}
+
+		.bit {
+			float: left;
+			width: 20px;
+			height: 20px;
+			margin: 2px;
+			border: 1px solid grey;
+			background-color: black;
+			color: red;
+			text-align: center;
+		}
+
+		.bit_on {
+			background-color: red;
+			color: black;
+		}
+
+
+
+		.row {
+			width: 208px;
+			height: 26px;
+			clear: left;
+
+		}
+
+		
+
+
+		table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+
+        /* Style for the active (selected) row */
+        tr.active {
+            background-color: #d3d3d3;
+            color: #000;
+        }
+
+        /* Optional: Hover effect to make it clear the rows are clickable */
+        tr:hover {
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
+	</style>
+
+
+
+	<script>
+
+		vValues = [0, 0, 0, 0, 0, 0, 0, 0]		// every value is a row...
+		hValues = [0, 0, 0, 0, 0, 0, 0, 0]		// every value is a row...
+
+		function getCoordinatesFromId(id) {
+			const x = parseInt(id.charAt(3)); // Extracts the character at index 3 (the first digit after "dot")
+			const y = parseInt(id.charAt(4)); // Extracts the character at index 4 (the second digit after "dot")
+
+			return { x, y };
+		}
+
+		function displayResults(){
+			if (document.getElementById("vData").checked)
+			{
+				document.getElementById("byteArray").innerText = vValues;
+			}
+			else
+			{
+				document.getElementById("byteArray").innerText = hValues;
+			}
+		}
+
+
+		function toggleDot(dot) {
+			xy = getCoordinatesFromId(dot.id)
+
+			if (dot.getAttribute("fill") === "#333") {
+				dot.setAttribute("fill", "red");
+				vValues[7 - xy.y] = vValues[7 - xy.y] | 2 ** xy.x;
+				hValues[7 - xy.x] = hValues[7 - xy.x] | 2 ** xy.y;
+			} else {
+				dot.setAttribute("fill", "#333");
+				vValues[7 - xy.y] = vValues[7 - xy.y] & ~(2 ** xy.x);
+				hValues[7 - xy.x] = hValues[7 - xy.x] & ~(2 ** xy.y);
+			}
+
+			//console.log("H:", hValues, " V:", vValues);
+			
+			displayResults();
+			
+		}
+
+
+	</script>
+	</head>
+	<body>
+
+	<h3>Very crude bimap editor</h3>
+
+	<svg width="165" height="165" xmlns="http://www.w3.org/2000/svg">
+		<rect width="165" height="165" fill="black" />
+		<!-- Create a grid of 8x8 circles -->
+		<g transform="translate(10, 10)">
+			<!-- Adjust these values for the size and spacing of the circles -->
+			<script type="text/javascript">
+				<![CDATA[
+				const radius = 8;
+				const spacing = 20;
+
+				for (let row = 0; row < 8; row++) {
+					for (let col = 0; col < 8; col++) {
+						const cx = col * spacing + radius - 5;
+						const cy = row * spacing + radius - 5;
+						document.write(`<circle cx="${cx}" cy="${cy}" r="${radius}" fill="#333" id="dot${row}${7 - col}" onclick="toggleDot(this)"/>`);
+					}
+				}
+	  ]]></script>
+		</g>
+	</svg>
+	<label>
+		<input type="radio" name="option" value="v" id="vData" checked onclick="displayResults()">
+		vertical
+	</label>
+	<br>
+	<label>
+		<input type="radio" name="option" value="h" onclick="displayResults()">
+		horizontal
+	</label>
+	Code: <textarea rows="1" cols="20" id="byteArray"></textarea>
+
+	<hr>
+
+	<table id="myTable">
+        <tr>
+            <th>width/len</th>
+			<th>data</th>
+            <th>Comment</th>
+        </tr>
+        <tr>
+            <td>Row 1 - Column 1</td>
+            <td>Row 1 - Column 2</td>
+			<td>Row 1 - Column 3</td>
+			
+        </tr>
+        <tr>
+            <td>Row 2 - Column 1</td>
+            <td>Row 2 - Column 2</td>
+			<td>Row 2 - Column 3</td>
+        </tr>
+        <tr>
+            <td>Row 3 - Column 1</td>
+            <td>Row 3 - Column 2</td>
+			<td>Row 3 - Column 3</td>
+        </tr>
+    </table>
+
+    <script>
+        // Get the table and all its rows
+        const table = document.getElementById('myTable');
+        const rows = table.getElementsByTagName('tr');
+
+        // Loop through each row and add a click event listener
+        for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+            rows[i].addEventListener('click', function() {
+                // Remove the 'active' class from any previously active row
+                for (let j = 1; j < rows.length; j++) {
+                    rows[j].classList.remove('active');
+                }
+
+                // Add the 'active' class to the clicked row
+                this.classList.add('active');
+            });
+        }
+    </script>
+
+
+
+</body>
+
+</html>

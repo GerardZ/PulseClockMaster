@@ -1,0 +1,187 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulsClockMaster</title>
+
+
+    <script src="myWebsockets.js"></script>
+    <script src="7segment.js"></script>
+
+    <style>
+        body {
+            background-color: #555;
+            /* Page background */
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page {
+            width: 800px;
+            margin: 2px auto;
+            background-color: #555;
+            /* Same grey as border for blend */
+            /*border: 1px solid #ccc;*/
+            /* Subtle border */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Top navigation bar */
+        .topnav {
+            background-color: #444;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 5px;
+        }
+
+        .topnav a {
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+        }
+
+        .topnav a:hover {
+            background-color: #555;
+        }
+
+        /* Secondary menu bar */
+        .menubar {
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: right;
+            border-bottom: 1px solid #ccc;
+            padding: 3px;
+        }
+
+        .menubar a {
+            color: #333;
+            text-decoration: none;
+            padding: 5px 7px;
+        }
+
+        .menubar a:hover {
+            background-color: #d0d0d0;
+        }
+
+        .content {
+            position: relative;
+            padding: 20px;
+        }
+
+        .horAlign {
+
+            display: flex;
+            flex-direction: row;
+            /* Stack vertically */
+            height: 50px;
+            /* Full viewport height (or any fixed height) */
+        }
+
+        .horAlign div {
+            flex: 1;
+            /* Take equal share of parent height */
+            padding: 2px;
+            box-sizing: border-box;
+        }
+
+        .dot {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 12px;
+            height: 12px;
+            background-color: #E44;
+            opacity: 30%;
+            border-radius: 50%;
+            pointer-events: none;
+            /* Optional: makes it non-interactive */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="topnav">
+            <h2>PulseClockMaster</h2>
+        </div>
+
+        <div class="menubar">
+            <a href="#">about</a>
+        </div>
+
+        <div class="content">
+
+            <div style="height:120px; width: 100%;">
+                <div id="display1" style="margin:auto;width: 70%;"></div>
+                <div id="dot1" class="dot"></div>
+            </div>
+            
+            <div style="height:12px; width: 100%;"></div>
+
+            <div class="horAlign">
+                <div></div>
+                <div></div>
+                <div id="displayDay"></div>
+                <div id="displayYMonth"></div>
+                <div id="displayYear"></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        const bgColor = "#555";
+        const fgColor = "#E44";
+        const display1 = new SegmentDisplay("display1", "00:00:00", 10, bgColor, fgColor);
+        display1.setClockDots(true);
+        const displayYear = new SegmentDisplay("displayYear", "0000", 10, bgColor, fgColor);
+        const displayYMonth = new SegmentDisplay("displayYMonth", "00", 10, bgColor, fgColor);
+        const displayDay = new SegmentDisplay("displayDay", "00", 10, bgColor, fgColor);
+
+        const wsHandler = new WebSocketHandler(
+            {
+                onConnectionStateChange: (state) => {
+                    console.log("Connection state:", state);
+                    handleConnectState(state);
+                },
+                onMessageReceived: (msg) => {
+                    handleWsMessage(msg);
+                }
+                //REMOVE This will be removed by CompressHTML.py and is for debugging through live server in VsCode
+                , debugUrl: "ws://192.168.0.164/ws"
+                //ENDREMOVE
+            });
+
+        function handleConnectState(state) {
+
+        }
+
+        function handleWsMessage(msg) {
+            console.log(msg);
+            const jsonObj = JSON.parse(msg);
+            display1.displayNumber(jsonObj.time || "00:00:00");
+
+            displayYear.displayNumber(jsonObj.year + 2000 || "0000");
+            displayYMonth.displayNumber(jsonObj.month || "00");
+            displayDay.displayNumber(jsonObj.mday || "00");
+            setDot(jsonObj.pulse);
+        }
+
+        function setDot(value) {
+            dot = document.getElementById("dot1");
+            dot.style.opacity = value ? "1" : "0.3";
+        }
+
+
+    </script>
+</body>
+
+
+</html>

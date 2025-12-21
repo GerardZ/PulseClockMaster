@@ -1,0 +1,33 @@
+# This is the compress.yml, used by the compress.py utility, here you can add extra files
+
+# Sourcedir, base html dir, under the project root.
+SOURCEDIR:
+  Html
+
+# destination file in which converted data should be stored
+DESTINATIONFILE:
+  include/appdata.h
+
+# HTML: this contains the input html-file(s), they will include their .css and .js local files and be gz-compressed
+# they will be named as the filename with dot replaced by underscore and appended with _gz, 
+# Example: index.html -> index_html_gz in the generated include/apphtml.h file.
+HTML: [
+  index.html
+]
+
+# MARKDOWN: this will convert a markdown to html and compressed, beware that it is taken from the projects root NOT from SOURCEDIR.
+# they will be named as the filename with dot replaced by underscore and appended with _html_gz, 
+# Example: README.md -> README_md_html_gz in the generated include/apphtml.h file.
+MARKDOWN: [
+  # README.md
+]
+
+# Other files, gz-compress. Filename example.txt -> example_txt_gz
+OTHERSGZ: [
+  zones.csv
+]
+
+# Other files uncompressed. Filename example.png -> example_png
+OTHERS: [
+  favicon.ico,
+  ]
