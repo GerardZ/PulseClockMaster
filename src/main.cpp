@@ -18,6 +18,7 @@ WiFiPortal portal("PulseClockMaster");
 uint16_t perfCount;
 bool previousDST;
 bool ClockPinState;
+char lastMessage[200];
 
 void toggleClockPin(int minute)
 {
@@ -28,9 +29,8 @@ void toggleClockPin(int minute)
 
 void sendUpdateToCLients(const struct tm *tm)
 {
-  char message[200];
-  sprintf(message, R"({"year":%d, "month":%d, "mday":%d, "wday":%d, "DST":%d, "time": "%2d:%02d:%02d", "pulse": %d})", tm->tm_year - 100, tm->tm_mon + 1, tm->tm_mday, tm->tm_wday, tm->tm_isdst, tm->tm_hour, tm->tm_min, tm->tm_sec, ClockPinState);
-  WsSendMessage(message);
+  sprintf(lastMessage, R"({"year":%d, "month":%d, "mday":%d, "wday":%d, "DST":%d, "time": "%2d:%02d:%02d", "pulse": %d})", tm->tm_year - 100, tm->tm_mon + 1, tm->tm_mday, tm->tm_wday, tm->tm_isdst, tm->tm_hour, tm->tm_min, tm->tm_sec, ClockPinState);
+  WsSendMessage(lastMessage);
 }
 
 void handleMinute(const struct tm *tm)
@@ -71,6 +71,7 @@ void HandleNewWsClient(AsyncWebSocketClient *client)
 {
   // new client...
   IPAddress remoteIp = client->remoteIP();
+  WsSendMessage(lastMessage, client->id());
 }
 
 void setup()

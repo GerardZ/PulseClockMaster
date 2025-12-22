@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PulsClockMaster</title>
 
-
     <script src="myWebsockets.js"></script>
     <script src="7segment.js"></script>
 
@@ -103,7 +102,6 @@
 </head>
 
 <body>
-
     <div class="page">
         <div class="topnav">
             <h2>PulseClockMaster</h2>
@@ -117,9 +115,9 @@
 
             <div style="height:120px; width: 100%;">
                 <div id="display1" style="margin:auto;width: 70%;"></div>
-                <div id="dot1" class="dot"></div>
+                <div id="pulseDot1" class="dot"></div>
             </div>
-            
+
             <div style="height:12px; width: 100%;"></div>
 
             <div class="horAlign">
@@ -148,7 +146,7 @@
         const wsHandler = new WebSocketHandler(
             {
                 onConnectionStateChange: (state) => {
-                    console.log("Connection state:", state);
+                    
                     handleConnectState(state);
                 },
                 onMessageReceived: (msg) => {
@@ -160,28 +158,26 @@
             });
 
         function handleConnectState(state) {
-
+            console.log("Connection state:", state);
         }
 
         function handleWsMessage(msg) {
             console.log(msg);
             const jsonObj = JSON.parse(msg);
-            display1.displayNumber(jsonObj.time || "00:00:00");
 
+            display1.displayNumber(jsonObj.time || "00:00:00");
             displayYear.displayNumber(jsonObj.year + 2000 || "0000");
             displayYMonth.displayNumber(jsonObj.month || "00");
             displayDay.displayNumber(jsonObj.mday || "00");
-            setDot(jsonObj.pulse);
+
+            setPulseDot(jsonObj.pulse);
         }
 
-        function setDot(value) {
-            dot = document.getElementById("dot1");
+        function setPulseDot(value) {
+            dot = document.getElementById("pulseDot1");
             dot.style.opacity = value ? "1" : "0.3";
         }
-
-
     </script>
 </body>
-
 
 </html>

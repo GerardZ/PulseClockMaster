@@ -12,6 +12,7 @@ void WiFiPortal::begin()
     loadCredentials(ssid, pass);
 
     WiFi.mode(WIFI_STA);
+    WiFi.setHostname(deviceName.c_str());
     WiFi.begin(ssid.c_str(), pass.c_str());
 
     Serial.print("Connecting to WiFi");
