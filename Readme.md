@@ -6,7 +6,7 @@ This is a NTP-clock which can drive a Pulse Clock, the type of clock found in sc
 
 ### Why would i need this
 
-You mght be a happy owner of such a slave clock, threw it on your attic, like me.  And always asked yourself how to enable that beautiful thing. This can be your savior. 
+You might be a happy owner of such a slave clock, threw it on your attic, like me.  And always asked yourself how to enable that beautiful thing. This can be your savior. 
 
 ### What do i need
 
@@ -33,8 +33,8 @@ ESP01 firmware has a wifi portal, NTP, a webserver displaying time and pulse sta
 ### Using
 
 Supply with mains, connect your clock, power up.
-On first connection there will be no wifi credentials so the device will go into portal mode and starts is own wifi station with SSID: PulseClockMaster, connect to it and open a page on your webbrowser. The portal page should come up. Enter your wifi credentials an press save. The device will reboot and connect, hopefully, to your wifi. From thereon you should be able to connect via http://PulseClockMaster.local but this depends on your router. If not try
-http://PulseClockMaster, is that doesnt work still. Find out what ip it is given by your router and connect via ip.
+On first connection there will be no wifi credentials so the device will go into portal mode and starts is own wifi station with SSID: PulseClockMaster, connect to it (pw: 12345678) and open a page on your webbrowser. The portal page should come up. Enter your wifi credentials an press save. The device will reboot and connect, hopefully, to your wifi. From thereon you should be able to connect via http://PulseClockMaster.local but this depends on your router. If not try
+http://PulseClockMaster. If that doesnt work still, find out what ip it is given by your router and connect via ip.
 There is only a display of time and date, so this step is not even necessary but it will give you a good idea that it is all functioning well.
 
 ### Todo\`s
