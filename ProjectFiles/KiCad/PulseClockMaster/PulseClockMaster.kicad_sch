@@ -2197,6 +2197,12 @@
 		(uuid "a30a8903-410a-4906-8563-e278bb79e72c")
 	)
 	(junction
+		(at 138.43 31.75)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bb5a8d6e-a12a-4614-952d-6b59326d81a7")
+	)
+	(junction
 		(at 115.57 66.04)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2347,6 +2353,16 @@
 			(type default)
 		)
 		(uuid "50245ba3-8727-4c56-8a34-ac05db97f4f8")
+	)
+	(wire
+		(pts
+			(xy 138.43 29.21) (xy 138.43 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "52cb6da6-8e50-42c9-81df-38d01af38b06")
 	)
 	(wire
 		(pts
@@ -2570,6 +2586,16 @@
 	)
 	(wire
 		(pts
+			(xy 138.43 31.75) (xy 139.7 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a9effde2-62f0-4a65-91c1-188d131cb602")
+	)
+	(wire
+		(pts
 			(xy 205.74 68.58) (xy 207.01 68.58)
 		)
 		(stroke
@@ -2630,6 +2656,16 @@
 	)
 	(wire
 		(pts
+			(xy 138.43 36.83) (xy 139.7 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2ceaccd-5fca-49e4-b2c5-8a36501539d4")
+	)
+	(wire
+		(pts
 			(xy 214.63 60.96) (xy 215.9 60.96)
 		)
 		(stroke
@@ -2647,6 +2683,16 @@
 			(type default)
 		)
 		(uuid "c8c6f6c6-3276-4456-8352-15f8fa2fbb47")
+	)
+	(wire
+		(pts
+			(xy 138.43 36.83) (xy 138.43 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d4ad9bd1-79db-4ce8-936d-11a0ab8eba6c")
 	)
 	(wire
 		(pts
@@ -3118,7 +3164,7 @@
 				)
 			)
 		)
-		(property "Value" "~"
+		(property "Value" "230V AC"
 			(at 89.535 64.77 0)
 			(effects
 				(font
@@ -3261,7 +3307,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" ")"
+		(property "Value" "BC817"
 			(at 206.502 51.308 0)
 			(effects
 				(font
@@ -3322,6 +3368,72 @@
 			(project "PulseClockMaster"
 				(path "/53b661e8-ae03-45d7-aac4-f86aa3eaa041"
 					(reference "Q2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+24V")
+		(at 138.43 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "50781704-dac8-4819-b609-cfbf6a8fa4d1")
+		(property "Reference" "#PWR018"
+			(at 138.43 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+24V"
+			(at 138.43 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 138.43 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 138.43 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+24V\""
+			(at 138.43 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "74ddab7c-f87b-4d25-8b2f-2cb542890858")
+		)
+		(instances
+			(project "PulseClockMaster"
+				(path "/53b661e8-ae03-45d7-aac4-f86aa3eaa041"
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -3943,7 +4055,7 @@
 	)
 	(symbol
 		(lib_id "Amplifier_Operational:LM358_DFN")
-		(at 257.81 114.3 0)
+		(at 147.32 34.29 0)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3952,7 +4064,7 @@
 		(fields_autoplaced yes)
 		(uuid "92521629-4202-4e56-b27e-d65b172b2954")
 		(property "Reference" "U4"
-			(at 257.81 104.14 0)
+			(at 147.32 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3960,7 +4072,7 @@
 			)
 		)
 		(property "Value" "LM358"
-			(at 257.81 106.68 0)
+			(at 147.32 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3968,7 +4080,7 @@
 			)
 		)
 		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
-			(at 257.81 114.3 0)
+			(at 147.32 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3977,7 +4089,7 @@
 			)
 		)
 		(property "Datasheet" "www.st.com/resource/en/datasheet/lm358.pdf"
-			(at 257.81 114.3 0)
+			(at 147.32 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3986,7 +4098,7 @@
 			)
 		)
 		(property "Description" "Low-Power, Dual Operational Amplifiers, DFN-8"
-			(at 257.81 114.3 0)
+			(at 147.32 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3995,7 +4107,7 @@
 			)
 		)
 		(property "Sim.Device" ""
-			(at 257.81 114.3 0)
+			(at 147.32 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4123,10 +4235,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "9acf5c68-b350-4e30-b910-614ff59ee83e")
 		(property "Reference" "U2"
-			(at 158.115 80.01 0)
+			(at 157.734 67.818 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4134,14 +4245,14 @@
 			)
 		)
 		(property "Value" "ESP01"
-			(at 158.115 81.28 0)
+			(at 162.052 58.928 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "ownFootprints:ESP01_conn"
+		(property "Footprint" "ownFootprints:ESP01_conn+outline"
 			(at 157.48 59.69 0)
 			(effects
 				(font
@@ -4651,7 +4762,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "(pin_names"
+		(property "Value" "BC807"
 			(at 206.502 79.756 0)
 			(effects
 				(font
@@ -5319,7 +5430,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "~"
+		(property "Value" "out"
 			(at 224.79 68.5799 0)
 			(effects
 				(font

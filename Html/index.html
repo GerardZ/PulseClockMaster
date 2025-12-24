@@ -32,18 +32,22 @@
             background-color: #444;
             color: white;
             display: flex;
+            position: relative;
             justify-content: space-around;
             padding: 5px;
         }
 
         .topnav a {
-            color: white;
+            color: grey;
             text-decoration: none;
-            padding: 6px 12px;
+            position: absolute;
+            top: 44px;
+            right: 12px;
         }
 
         .topnav a:hover {
-            background-color: #555;
+            color: white;
+            
         }
 
         /* Secondary menu bar */
@@ -53,16 +57,6 @@
             justify-content: right;
             border-bottom: 1px solid #ccc;
             padding: 3px;
-        }
-
-        .menubar a {
-            color: #333;
-            text-decoration: none;
-            padding: 5px 7px;
-        }
-
-        .menubar a:hover {
-            background-color: #d0d0d0;
         }
 
         .content {
@@ -98,6 +92,21 @@
             pointer-events: none;
             /* Optional: makes it non-interactive */
         }
+
+        #disconnect-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(50, 50, 50, 0.7);
+            color: white;
+            font-size: 2rem;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
     </style>
 </head>
 
@@ -105,10 +114,11 @@
     <div class="page">
         <div class="topnav">
             <h2>PulseClockMaster</h2>
+            <a href="https://github.com/GerardZ/PulseClockMaster/blob/main/Readme.md" target="_blank">about</a>
         </div>
 
-        <div class="menubar">
-            <a href="https://github.com/GerardZ/PulseClockMaster/blob/main/Readme.md" target="_blank">about</a>
+        <div id="disconnect-overlay">
+            🔌 Disconnected from server
         </div>
 
         <div class="content">
@@ -146,7 +156,7 @@
         const wsHandler = new WebSocketHandler(
             {
                 onConnectionStateChange: (state) => {
-                    
+
                     handleConnectState(state);
                 },
                 onMessageReceived: (msg) => {
@@ -159,6 +169,9 @@
 
         function handleConnectState(state) {
             console.log("Connection state:", state);
+            const overlay = document.getElementById("disconnect-overlay");
+            if (state == "connected") overlay.style.display = "none";
+            else overlay.style.display = "flex";
         }
 
         function handleWsMessage(msg) {

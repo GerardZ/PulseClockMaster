@@ -54,7 +54,7 @@ class WebSocketHandler {
         this.onMessageReceived = options.onMessageReceived || function () { };
 
         // Config
-        this.timeoutLength = options.timeoutLength || 5000; // ms 62 seconds, so expecting every 60 seconds activity from server to keep alive
+        this.timeoutLength = options.timeoutLength || 3200; // ms 62 seconds, so expecting every 60 seconds activity from server to keep alive
         this.checkInterval = options.checkInterval || 1500;  // ms
 
         // If needed path can be set
@@ -125,6 +125,7 @@ class WebSocketHandler {
             const now = Date.now();
             if (now - this.lastActivity > this.timeoutLength) {
                 console.warn("WebSocket inactive for too long. Closing.");
+                this._setConnectionState("closing");
                 this.ws.close();
             }
         }, this.checkInterval);
