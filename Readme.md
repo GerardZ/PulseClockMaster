@@ -6,7 +6,7 @@ TAGS: slaveClock slave-clock pulseclock pulse-clock secondary-clock
 
 This is a NTP-clock which can drive a Pulse Clock/ secondary clock/ slave clock, the type of clock found in schools, stations or other big buildings. Nowadays most of them have been replaced by modern ones, but they still exists. These clocks are driven by a master clock which pulses the slave clocks every minute, where it moves one minute.
 <center><img src="images/page.png" alt="Diagram" width="500"></center>
-
+Webpage is a mere indication of the clock, time is displayed and is coming from the ESP, it is not your pc`s time (though they should be the same). Date is displayed and there is a red dot in the top right corner which displays the state of the pulse, on = poitive, off = negative.
 
 ### Why would i need this
 
