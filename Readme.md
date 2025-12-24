@@ -5,6 +5,8 @@ TAGS: slaveClock slave-clock pulseclock pulse-clock secondary-clock
 ### So what is this
 
 This is a NTP-clock which can drive a Pulse Clock/ secondary clock/ slave clock, the type of clock found in schools, stations or other big buildings. Nowadays most of them have been replaced by modern ones, but they still exists. These clocks are driven by a master clock which pulses the slave clocks every minute, where it moves one minute.
+<center><img src="images/page.png" alt="Diagram" width="500"></center>
+
 
 ### Why would i need this
 
@@ -21,12 +23,12 @@ You might be a happy owner of such a slave clock, threw it on your attic, like m
 
 Circuit consist of a 24V power module, 3v3 step down module, an ESP01, opamp & 2 transistor driver.
 
-<a href="images/schema.png" target="_blank">
+<center><a href="images/schema.png" target="_blank">
   <img src="images/schema.png" alt="Diagram" width="600">
-</a>
+</a></center>
 
-We need a 24V pulse to drive the clock. Pulses are giving every minute where one pulse is positive, the next negative, this is done by the opamp, buffer transistors and the output electrolitic capacitors. The ESP01 pulses the opamp by AND-ing the lsb of the minutes every minute.
-Internally time is handled by NTP so we never need to worry over adjusting except for power outages.
+We need a 24V pulse to drive the clock. Pulses are given every minute where one pulse is positive, the next negative, this is done by the opamp, buffer transistors and the output electrolitic capacitors. The ESP01 pulses the opamp by AND-ing the lsb of the minutes every minute.
+Internally time is handled by NTP so we never need to worry over adjusting except for power outages and DST change.
 When you have multiple clocks, you probably get away with two or three, not tested. You could rise capacitance of the output capacitors by 2x 1000uF.
 
 ### The software
@@ -46,4 +48,5 @@ There is only a display of time and date, so this step is not even necessary but
 *   nicer favicon
 *   automaticly handle DST changes
 *   power outage handling ?
+
 
