@@ -4,8 +4,8 @@ TAGS: slaveClock slave-clock pulseclock pulse-clock secondary-clock
 
 ### So what is this
 
-This is a NTP-clock which can drive a Pulse Clock/ secondary clock/ slave clock, the type of clock found in schools, stations or other big buildings. Nowadays most of them have been replaced by modern ones, but they still exists. These clocks are driven by a master clock which pulses the slave clocks every minute, where it moves one minute.
-<center><img src="images/page.png" alt="Diagram" width="500"></center>
+This is a NTP-clock which can drive a Pulse Clock/ secondary clock/ slave clock, the type of clock found in schools, stations or other big buildings. Nowadays most of them have been replaced by modern ones, but they still exists. These clocks are driven by a master clock which pulses the slave clocks every minute, where it moves the minute-hand one minute.
+<div align="center"><img src="images/page.png" alt="Diagram" width="500"></div>
 Webpage is a mere indication of the clock, time is displayed and is coming from the ESP, it is not your pc`s time (though they should be the same). Date is displayed and there is a red dot in the top right corner which displays the state of the pulse, on = poitive, off = negative.
 
 ### Why would i need this
@@ -23,9 +23,9 @@ You might be a happy owner of such a slave clock, threw it on your attic, like m
 
 Circuit consist of a 24V power module, 3v3 step down module, an ESP01, opamp & 2 transistor driver.
 
-<center><a href="images/schema.png" target="_blank">
+<div align="center"><a href="images/schema.png" target="_blank">
   <img src="images/schema.png" alt="Diagram" width="600">
-</a></center>
+</a></div>
 
 We need a 24V pulse to drive the clock. Pulses are given every minute where one pulse is positive, the next negative, this is done by the opamp, buffer transistors and the output electrolitic capacitors. The ESP01 pulses the opamp by AND-ing the lsb of the minutes every minute.
 Internally time is handled by NTP so we never need to worry over adjusting except for power outages and DST change.

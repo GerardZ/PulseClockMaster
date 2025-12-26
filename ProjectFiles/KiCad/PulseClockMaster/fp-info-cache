@@ -1,4 +1,4 @@
-25642488678467048
+25644307254626479
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -102656,6 +102656,13 @@ Module ESP-8266 ESP8266
 16
 ownFootprints
 ESP01_conn
+
+
+0
+8
+8
+ownFootprints
+ESP01_conn+outline
 
 
 0
