@@ -19,13 +19,13 @@ uint16_t perfCount;
 bool previousDST;
 bool ClockPinState;
 char lastMessage[200];
-uint8_t holdForNormalTime =0;  // this is the number of minutes that should be skipped if we come from DST
-uint8_t extraForDstTime =0;    // this holds the number of minutes that should be added when we go to DST
+uint8_t DstPauseTime = 0;  // this is the number of minutes that should be skipped if we come from DST
+uint8_t DstExtraTime = 0;    // this holds the number of minutes that should be added when we go to DST
 
 void toggleClockPin(int minute)
 {
-  if (holdForNormalTime){     // we come from DST, hold for 1 hour
-    holdForNormalTime--;      // keep count
+  if (DstPauseTime){     // we come from DST, hold for 1 hour
+    DstPauseTime--;      // keep count
     return;
   }
   
@@ -56,9 +56,9 @@ void handleMinute(const struct tm *tm)
 void handleSecond(const struct tm *tm)
 {
     sendUpdateToCLients(tm);
-    if ((tm->tm_sec == 20 or tm->tm_sec == 20) and !extraForDstTime){
+    if ((tm->tm_sec == 20 or tm->tm_sec == 20) and !DstExtraTime){   // handle to DST
       toggleDSTClockpin();
-      extraForDstTime--;
+      DstExtraTime--;
     }
 }
 
@@ -72,12 +72,12 @@ void handleHour(const struct tm *tm)
     if (tm->tm_isdst)   // we go into DST, add one hour
     {
       // we switched to DST, we need to let the clock 1 hour extra
-      extraForDstTime = 60;
+      DstExtraTime = 59;
     }
     else
     {
       // we switched from DST to normal, we need to let the clock pause for one hour...
-      holdForNormalTime = 60;
+      DstPauseTime = 59;
     }
   }
 }
