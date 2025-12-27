@@ -10,7 +10,7 @@ Webpage is a mere indication of the clock, time is displayed and is coming from 
 
 ### Why would i need this
 
-You might be a happy owner of such a slave clock, threw it on your attic, like me.  And always asked yourself how to enable that beautiful thing. This can be your savior. 
+You might be a happy owner of such a slave clock, threw it on your attic, like me.  Always asking yourself how to enable that beautiful thing. This can be your savior. 
 
 ### What do i need
 
