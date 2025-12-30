@@ -2,8 +2,6 @@
 
 /* Usage:
 
-
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -59,8 +57,6 @@
 
 globalThis.svgNS = "http://www.w3.org/2000/svg";
 
-
-// ✅ The Class
 class SegmentDisplay {
 
     static nextId = 0;
@@ -116,7 +112,6 @@ class SegmentDisplay {
 
         this.isClockDisplay = false;
         this.hasMinusSign = false;
-
 
         this.bgColor = bgColor
         this.fgColor = fgColor;
@@ -270,7 +265,6 @@ class SegmentDisplay {
         return this.digitWidth;
     }
 
-
     setDigit(index, value, showDot = false) {
         const onSegments = SegmentDisplay.DIGIT_SEGMENTS[value] || [];
         const allSegs = Object.keys(SegmentDisplay.SEGMENT_SHAPES);
@@ -281,7 +275,6 @@ class SegmentDisplay {
             el.classList.toggle("segOn", isOn);
         }
     }
-
 
     setClockDots(state) {
         const dotElements = this.parent.querySelectorAll(".clockDot");
@@ -301,9 +294,7 @@ class SegmentDisplay {
         return String(numStr).toUpperCase().replace(/[^0-9A-F]/g, "");
     }
 
-
     displayNumber(numStr, dots = []) {
-
         const cleanedAndAligned = this.alignToRight(this.cleanNumberString(numStr));
         // FIXME handle dot
 
@@ -312,5 +303,4 @@ class SegmentDisplay {
             this.setDigit(idx, char, showDot);
         });
     }
-
 }

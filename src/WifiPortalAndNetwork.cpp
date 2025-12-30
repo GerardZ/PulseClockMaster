@@ -64,7 +64,7 @@ void WiFiPortal::startCaptivePortal()
 void WiFiPortal::handleRoot(AsyncWebServerRequest *request)
 {
     String html = R"rawliteral(
-    <html>
+<html>
 <head>
   <title>)rawliteral" +
                   deviceName + R"rawliteral( WiFi Config</title>
@@ -122,7 +122,7 @@ void WiFiPortal::handleRoot(AsyncWebServerRequest *request)
   </div>
 </body>
 </html>
-    )rawliteral";
+)rawliteral";
     request->send(200, "text/html", html);
 }
 

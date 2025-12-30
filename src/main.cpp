@@ -29,7 +29,7 @@ void toggleClockPin(int minute)
     return;
   }
   
-  ClockPinState = (minute & 1);
+  ClockPinState = (minute & 1);   // clockpulse polarity is in sync with minute, this way we always have same polarity so we never need to alter polarity on the clock itself once it is correct.
   pinMode(CLOCKPIN, OUTPUT);
   digitalWrite(CLOCKPIN, ClockPinState);
 }
@@ -56,9 +56,12 @@ void handleMinute(const struct tm *tm)
 void handleSecond(const struct tm *tm)
 {
     sendUpdateToCLients(tm);
-    if ((tm->tm_sec == 20 or tm->tm_sec == 20) and !DstExtraTime){   // handle to DST
+
+    // handle to DST, we do 60 extra pulses on :20 and :40 second after DST has become active
+    // note that we toggle twice in a minute to keep in sync with normal minute pulse.
+    if ((tm->tm_sec == 20 or tm->tm_sec == 40) and !DstExtraTime){
       toggleDSTClockpin();
-      DstExtraTime--;
+      DstExtraTime--;                                                // track count
     }
 }
 
@@ -84,6 +87,7 @@ void handleHour(const struct tm *tm)
 
 void HandleWsMessage(uint8_t *message, size_t len, AsyncWebSocketClient *client)
 {
+  // gets called when there is an incoming websockets message.
 }
 
 void HandleNewWsClient(AsyncWebSocketClient *client)
