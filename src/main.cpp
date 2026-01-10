@@ -126,7 +126,10 @@ void initDST(){
 
 void setup()
 {
-  Serial.begin(115200);
+  delay(2000);
+  Serial.begin(74880);
+  Serial.println("Boot OK");
+  delay(2000);
   portal.begin();
   // we now have wifi...
 
